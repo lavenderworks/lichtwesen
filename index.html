@@ -1,0 +1,1136 @@
+<!DOCTYPE html><html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lichtwesen Doula</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">  <style>
+    :root{
+      --bg:#f7f2ec;
+      --card:#ffffff;
+      --sand:#e9ddd2;
+      --accent:#c19a7b;
+      --text:#4f4038;
+      --muted:#7a6a60;
+      --shadow:0 10px 30px rgba(0,0,0,0.08);
+    }
+
+.feedback-btn {
+  padding: 12px 18px;
+  border-radius: 30px;
+  border: none;
+  background: #c19a7b;
+  color: white;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CONTENT */
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+/* CLOSE */
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* INPUTS */
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+/* BUTTON */
+.modal-content button {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 30px;
+  background: #c19a7b;
+  color: white;
+  cursor: pointer;
+}
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+      font-family:Inter,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+
+    h1,h2,h3{font-family:'Playfair Display',serif;}
+
+    a{text-decoration:none;color:inherit;}
+
+    .nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      background:rgba(247,242,236,0.85);
+      backdrop-filter:blur(10px);
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      padding:12px;
+      z-index:1000;
+      font-size:13px;
+    }
+
+    .hero{
+      height:100vh;
+      background:url('./assets/baby3.webp?auto=format&fit=crop&w=1800&q=80') center/cover;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#fff;
+      position:relative;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom,rgba(0,0,0,0.35),rgba(0,0,0,0.6));
+    }
+
+    .hero-content{position:relative;max-width:850px;padding:20px;}
+
+    .hero h1{font-size:3.5rem;}
+
+    .hero p{font-size:1.2rem;margin-top:15px;}
+
+    .btn{
+      display:inline-block;
+      margin-top:20px;
+      padding:12px 22px;
+      border-radius:40px;
+      background:var(--accent);
+      color:white;
+    }
+
+    section{padding:90px 20px;max-width:1100px;margin:auto;}
+
+    h2{text-align:center;margin-bottom:40px;font-size:2.4rem;}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+
+    .card{background:#fff;padding:20px;border-radius:14px;box-shadow:var(--shadow);}
+
+    .timeline{display:flex;flex-direction:column;gap:12px;}
+
+    .step{background:#fff;padding:18px;border-radius:12px;box-shadow:var(--shadow);}
+
+    .cta{background:var(--sand);text-align:center;padding:70px 20px;border-radius:20px;}
+    input,textarea{
+      width:100%;
+      padding:12px;
+      margin-bottom:10px;
+      border-radius:10px;
+      border:none;
+    }
+
+    form{max-width:600px;margin:auto;}
+.story {
+  padding: 80px 0;
+}
+
+.story h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.story-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.story-track {
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  gap: 20px;
+  width: 100%;
+}
+
+.story-item {
+  min-width: 80%;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.story-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-text {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.story-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 10;
+}
+
+.story-btn.left {
+  left: 10px;
+}
+
+.story-btn.right {
+  right: 10px;
+}
+.contact-form {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-form h3 {
+  font-size: 1.6rem;
+  margin-bottom: 5px;
+}
+
+.contact-form p {
+  color: #7a6a60;
+  margin-bottom: 10px;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  font-family: inherit;
+}
+
+.contact-form button {
+  padding: 14px;
+  border: none;
+  border-radius: 40px;
+  background: #c19a7b;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.contact-form button:hover {
+  transform: translateY(-2px);
+}
+
+.small-note {
+  font-size: 12px;
+  color: #7a6a60;
+  text-align: center;
+}
+
+.ff-btn {
+  padding: 10px 14px;
+  border-radius: 30px;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.ff-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Primary (WhatsApp Kontakt) */
+.primary {
+  background: #25D366;
+  color: white;
+}
+
+/* Community */
+.secondary {
+  background: #e9ddd2;
+  color: #4f4038;
+}
+
+/* Telegram */
+.tertiary {
+  background: #229ED9;
+  color: white;
+}
+@media (max-width: 600px) {
+  .floating-footer {
+    width: 95%;
+    justify-content: space-between;
+    border-radius: 20px;
+  }
+
+  .ff-btn {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+  }
+}
+.why-doula {
+  padding: 90px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.why-doula .intro {
+  text-align: center;
+  color: #5f5147;
+  max-width: 800px;
+  margin: 0 auto 40px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.why-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+.why-text {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  margin-bottom: 30px;
+}
+
+.why-text blockquote {
+  border-left: 3px solid #c19a7b;
+  padding-left: 15px;
+  color: #5f5147;
+  font-style: italic;
+}
+
+.why-note {
+  text-align: center;
+  color: #5f5147;
+}
+.pricing {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.pricing-intro {
+  margin-bottom: 40px;
+  color: #7a6a60;
+}
+
+.pricing-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.price-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 18px;
+  width: 280px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+.price-card.highlight {
+  transform: scale(1.05);
+  border: 2px solid #c19a7b;
+}
+
+.price {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.price-card ul {
+  padding-left: 18px;
+  margin: 15px 0;
+}
+
+.price-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: 30px;
+  background: #c19a7b;
+  color: white;
+  text-decoration: none;
+}
+.soft-pricing, .pricing-trust, .pricing-cta {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.price-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.price-card {
+  width: 260px;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  text-align: left;
+}
+
+.price-card.highlight {
+  border: 2px solid #c19a7b;
+  transform: scale(1.05);
+}
+
+.price {
+  font-weight: bold;
+  margin: 10px 0;
+  color: #c19a7b;
+}
+
+.pricing-trust p {
+  max-width: 700px;
+  margin: 10px auto;
+  color: #5f5147;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 20px;
+  border-radius: 30px;
+  background: #c19a7b;
+  color: white;
+  text-decoration: none;
+}
+.review-slider {
+  padding: 90px 20px;
+  text-align: center;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.slider-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slide {
+  min-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.slide-content {
+  background: #fff;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  text-align: left;
+}
+
+.slide-content h3 {
+  margin-bottom: 15px;
+  color: #4f4038;
+}
+
+.slide-content p {
+  color: #5f5147;
+  line-height: 1.7;
+}
+
+.slide-content span {
+  display: block;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #7a6a60;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.slider-btn.left { left: 10px; }
+.slider-btn.right { right: 10px; }
+html {
+  scroll-behavior: smooth;
+}
+</style>
+</head>
+<body><div class="nav">
+  <a href="#about">Über mich</a>
+  <a href="#services">Angebote</a>
+  <a href="#preise">Preise</a>
+  <a href="#why-doula">Studien</a>
+  <a href="#erfahrungen">Bewertungen</a>
+
+  <a href="#contact">Kontakt</a>
+   <a href="https://wa.me/4915739643278?text=Hallo%20ich%20würde%20gern%20ein%20Erstgespräch%20mit%20dir%20vereinbaren"
+     target="_blank">
+    💬 Whatsapp
+  </a>
+
+</div><!-- HERO --><div class="hero">
+  <div class="hero-content">
+    <h1>Lichtwesen Doula</h1>
+    <p>Geburt ist ein Übergang – ein kraftvoller Moment zwischen zwei Welten.</p>
+    <p>Ich begleite dich einfühlsam durch Schwangerschaft, Geburt und Wochenbett, damit du dich sicher, gestärkt und verstanden fühlst.</p>
+    <a class="btn" href="#contact">Erstgespräch</a>
+  </div>
+</div>
+<!-- ABOUT --><section id="about">
+  <h2>Über mich</h2>
+      <div class="story-item">
+         <img src="./assets/babyCare2.png?auto=format&fit=crop&w=1200&q=80">
+        <div class="story-text">
+    Mein Name ist Leonie. Ich bin Mama eines kleinen Wirbelwinds und lebe mit meiner Familie in Schweinfurt.
+    Meine Reise begann 2020 mit einer sehr prägenden, traumatischen Geburtserfahrung. Diese Erfahrung hat in mir den tiefen Wunsch geweckt, Frauen eine sichere, selbstbestimmte und liebevolle Geburt zu ermöglichen.
+  <p>
+    Ich begleite Frauen mit Herz, Intuition und Wissen durch Schwangerschaft, Geburt und Wochenbett. Kräuterheilkunde, ganzheitliches Denken und emotionale Begleitung sind ein wichtiger Teil meiner Arbeit.
+  </p>
+</div>
+</div>
+</section><!-- SERVICES --><section id="services">
+<section class="story">
+  <h2>Deine Reise</h2>
+
+  <div class="story-wrapper">
+
+    <button class="story-btn left" onclick="scrollStory(-1)">‹</button>
+
+    <div class="story-track" id="storyTrack">
+
+      <div class="story-item">
+        <img src="./assets/doula1.png?auto=format&fit=crop&w=1200&q=80">
+        <div class="story-text">
+          <h3>Kinderwunsch & Planung</h3>
+          <p>Der Weg zu einem Kind beginnt oft lange vor der Schwangerschaft. Ich begleite dich in dieser sensiblen Phase mit Ruhe, Klarheit und emotionaler Stabilität. Raum für Sehnsucht, Fragen, vergangene Erfahrungen und die Rückverbindung zu deinem Körper und deinem Zyklus.</p>
+        </div>
+      </div>
+      <div class="story-item">
+        <img src="./assets/pregnant1.jpg?auto=format&fit=crop&w=1200&q=80">
+        <div class="story-text">
+          <h3>Begleitung während der Schwangerschaft</h3>
+          <p>Einfühlsame Begleitung durch deine Schwangerschaft mit Gesprächen, Ritualen, Kräuterwissen und emotionaler Unterstützung. Damit du dich sicher, getragen und verbunden mit dir und deinem Baby fühlst.</p>
+        </div>
+      </div>
+
+      <div class="story-item">
+        <img src="./assets/calm1.jpg?auto=format&fit=crop&w=1200&q=80">
+        <div class="story-text">
+          <h3>Vorbereitung auf die Geburt</h3>
+          <p>In achtsamer Vorbereitung auf deine Geburt begleite ich dich mit Wissen, Atem- und Körperarbeit, Geburtsvorstellungen und emotionaler Stärkung. Damit du Vertrauen in deinen Körper entwickelst, Ängste loslassen kannst und dich gestärkt und selbstbestimmt auf dein Geburtserlebnis zubewegst.</p>
+        </div>
+      </div>
+
+      <div class="story-item">
+        <img src="./assets/baby1.jpg?auto=format&fit=crop&w=1200&q=80">
+        <div class="story-text">
+          <h3>Die Geburt</h3>
+          <p>Ruhige und konstante Präsenz während deiner Geburt. Ich bin an deiner Seite – stabil, stärkend und intuitiv durch jeden Moment hindurch.</p>
+        </div>
+      </div>
+
+      <div class="story-item">
+        <img src="./assets/babyCare2.png?auto=format&fit=crop&w=1200&q=80">
+        <div class="story-text">
+          <h3>Wochenbett & Ankommen</h3>
+          <p>Das Ankommen als Familie braucht Zeit, Ruhe und Schutz. Ich unterstütze dich emotional und praktisch im Wochenbett, helfe bei Stillen, Alltag und Rückbildung und gebe dir den Raum, wirklich anzukommen.</p>
+        </div>
+      </div>
+      <div class="story-item">
+        <img src="./assets/baby2.jpg?auto=format&fit=crop&w=1200&q=80">
+        <div class="story-text">
+          <h3>Kinderbetreuung & Entlastung</h3>
+          <p>Liebevolle, achtsame Betreuung deines Babys oder deiner Kinder bei dir zuhause. Damit du schlafen, durchatmen oder Termine wahrnehmen kannst – in Sicherheit, Vertrauen und Ruhe.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="story-btn right" onclick="scrollStory(1)">›</button>
+
+  </div>
+</section>
+  <h2>Angebote</h2>
+<div class="grid">
+  <div class="card">
+    🌷 Kinderwunsch & Planung
+    <p>Ein Kind beginnt oft als Gefühl. Ich begleite dich dabei, Vertrauen in deinen Körper zu entwickeln, Klarheit zu finden und dich innerlich auf dein Baby vorzubereiten – in deinem Tempo, ohne Druck.</p>
+    <a href="#kinderwunsch" class="card-link">Mehr erfahren →</a>
+  </div>
+
+  <div class="card">
+    🤰 Schwangerschaftsbegleitung
+    <p>Du musst diese Zeit nicht allein tragen. Ich begleite dich einfühlsam durch deine Schwangerschaft – mit Gesprächen, Ruhe und Stabilität, damit du dich sicher und getragen fühlst.</p>
+    <a href="#schwangerschaft" class="card-link">Mehr erfahren →</a>
+  </div>
+
+  <div class="card">
+    🌸 Geburtsbegleitung
+    <p>In einem der intensivsten Momente deines Lebens bin ich an deiner Seite. Ich gebe dir Halt, Orientierung und erinnere dich daran, wie stark du bist – damit du deiner Geburt vertrauen kannst.</p>
+    <a href="#geburt" class="card-link">Mehr erfahren →</a>
+  </div>
+
+  <div class="card">
+    🕊 Wochenbett & Nachsorge
+    <p>Nach der Geburt beginnt das echte Ankommen. Ich unterstütze dich im Alltag, beim Stillen und emotional – damit du in Ruhe in deiner neuen Rolle wachsen kannst.</p>
+    <a href="#wochenbett" class="card-link">Mehr erfahren →</a>
+  </div>
+
+  <div class="card">
+    🌿 Kräuter & ganzheitliche Begleitung
+    <p>Sanfte Pflanzenkraft kann dich in jeder Phase unterstützen – für mehr Ruhe, Heilung und ein gutes Körpergefühl, abgestimmt auf dich und deine Bedürfnisse.</p>
+    <a href="#kraeuter" class="card-link">Mehr erfahren →</a>
+  </div>
+
+  <div class="card">
+    🌱 Kinderbetreuung & Entlastung
+    <p>Du darfst auch mal loslassen. Ich kümmere mich liebevoll um dein Baby oder deine Kinder, damit du zur Ruhe kommst und neue Kraft schöpfen kannst.</p>
+    <a href="#betreuung" class="card-link">Mehr erfahren →</a>
+  </div>
+</div>
+</section>
+
+
+<section id="kinderwunsch" class="detail-section">
+  <h2>Kinderwunsch & Planung</h2>
+  <p>
+    Dein Wunsch nach einem Kind ist etwas ganz Besonderes. Ich begleite dich dabei, Vertrauen in deinen Körper zu entwickeln, deinen Zyklus besser zu verstehen und dich innerlich auf diese Reise vorzubereiten. Gemeinsam schaffen wir eine stabile, ruhige Basis – für dich und dein zukünftiges Baby.
+  </p>
+</section>
+
+
+<section id="schwangerschaft" class="detail-section">
+  <h2>Schwangerschaftsbegleitung</h2>
+  <p>
+    Diese Zeit darf sich sicher und getragen anfühlen. Ich bin an deiner Seite mit Gesprächen, kleinen Ritualen und liebevoller Begleitung – damit du dich nicht allein fühlst und deiner eigenen Stärke vertrauen kannst.
+  </p>
+</section>
+
+
+<section id="geburt" class="detail-section">
+  <h2>Geburtsbegleitung</h2>
+  <p>
+    Während deiner Geburt bin ich konstant an deiner Seite. Ich halte den Raum für dich, gebe dir Sicherheit und unterstütze dich dabei, deinen eigenen Weg durch die Geburt zu finden – ruhig, intuitiv und in deinem Tempo.
+  </p>
+</section>
+
+
+<section id="wochenbett" class="detail-section">
+  <h2>Wochenbett & Nachsorge</h2>
+  <p>
+    Nach der Geburt beginnt das Ankommen. Ich unterstütze dich im Alltag, begleite dich emotional und helfe dir dabei, dich in deiner neuen Rolle sicher zu fühlen – ohne Druck, in deinem eigenen Rhythmus.
+  </p>
+</section>
+
+
+<section id="kraeuter" class="detail-section">
+  <h2>Kräuter & ganzheitliche Begleitung</h2>
+  <p>
+    Die Natur bietet sanfte Unterstützung für Körper und Seele. Ich zeige dir, wie du Kräuter gezielt in Schwangerschaft, Geburt und Wochenbett einsetzen kannst – für mehr Ruhe, Heilung und Wohlbefinden.
+  </p>
+</section>
+
+
+<section id="betreuung" class="detail-section">
+  <h2>Kinderbetreuung & Entlastung</h2>
+  <p>
+    Manchmal brauchst du einfach eine Pause. Ich kümmere mich liebevoll um dein Baby oder deine Kinder, damit du durchatmen, schlafen oder Zeit für dich finden kannst – in dem Wissen, dass dein Kind gut aufgehoben ist.
+  </p>
+</section>
+
+<section id="why-doula" class="why-doula">
+
+  <h2>Warum eine Doula?</h2>
+
+  <p class="intro">
+    Geburt ist nicht nur ein medizinischer Vorgang – sondern ein zutiefst emotionales, hormonelles und psychisches Ereignis.
+    Genau hier setzt die Doula-Begleitung an: kontinuierliche, menschliche Unterstützung in einer Zeit, die dein gesamtes System prägt.
+  </p>
+
+  <div class="why-grid">
+
+    <div class="why-card">
+      <h3>🤍 Bessere Geburtsergebnisse</h3>
+      <p>
+        Studien zeigen, dass kontinuierliche Unterstützung während der Geburt mit einer höheren Wahrscheinlichkeit für spontane vaginale Geburten,
+        kürzeren Geburtsverläufen und weniger medizinischen Eingriffen verbunden ist.
+      </p>
+    </div>
+
+    <div class="why-card">
+      <h3>🌿 Weniger Eingriffe & Schmerzmittel</h3>
+      <p>
+        Frauen mit kontinuierlicher Begleitung benötigen im Durchschnitt weniger Schmerzmedikation,
+        weniger PDA und haben ein geringeres Risiko für Kaiserschnitte oder instrumentelle Geburten.
+      </p>
+    </div>
+
+    <div class="why-card">
+      <h3>🕊 Mehr Sicherheit & weniger Angst</h3>
+      <p>
+        Die Anwesenheit einer vertrauten, ruhigen Begleitperson senkt nachweislich Stress- und Angstlevel während der Geburt –
+        ein entscheidender Faktor für einen natürlichen Geburtsverlauf.
+      </p>
+    </div>
+
+    <div class="why-card">
+      <h3>🤱 Bessere Geburtserfahrung</h3>
+      <p>
+        Frauen berichten signifikant häufiger von positiven Geburtserlebnissen,
+        wenn sie kontinuierlich emotional unterstützt werden – unabhängig vom Geburtsverlauf.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="why-text">
+
+    <h3>Was sagt die Forschung?</h3>
+
+    <p>
+      Eine große Cochrane-Übersichtsarbeit, die Daten aus über 27 randomisierten Studien mit rund 16.000 Frauen analysierte,
+      kommt zu dem Ergebnis:
+    </p>
+
+    <blockquote>
+      „Kontinuierliche Unterstützung während der Geburt verbessert die Geburtsergebnisse und die Erfahrung der Frauen –
+      insbesondere, wenn diese Unterstützung von einer nicht-klinischen, kontinuierlich anwesenden Person (wie einer Doula) geleistet wird.“
+    </blockquote>
+
+    <p>
+      Frauen mit kontinuierlicher Begleitung waren unter anderem häufiger in der Lage, spontan vaginal zu gebären,
+      hatten kürzere Geburtsverläufe und benötigten weniger medizinische Interventionen.
+      Gleichzeitig traten keine nachgewiesenen negativen Effekte durch diese Form der Unterstützung auf.
+    </p>
+
+  </div>
+
+  <div class="why-note">
+
+    <h3>Wichtiger als Zahlen</h3>
+
+    <p>
+      Neben allen Studien zeigt sich ein zentraler Punkt immer wieder:
+      Menschen gebären besser, wenn sie sich sicher, gesehen und nicht allein fühlen.
+    </p>
+
+    <p>
+      Eine Doula ersetzt keine medizinische Versorgung – sie ergänzt sie durch etwas, das im Klinikalltag oft fehlt:
+      kontinuierliche emotionale Präsenz.
+    </p>
+
+  </div>
+
+</section>
+
+<section id="preise" class="soft-pricing">
+
+  <h2>Begleitung & Orientierung</h2>
+
+  <p class="intro">
+    Jede Begleitung ist individuell. Die folgenden Angaben geben dir eine Orientierung – der genaue Umfang entsteht immer gemeinsam im Gespräch.
+  </p>
+
+  <div class="price-grid">
+
+    <div class="price-card">
+      <h3>🌹 Kinderwunsch & Planung</h3>
+      <p class="price">ab 80€ pro Termin</p>
+      <p>Einzelbegleitung oder individuelle Vorbereitung auf deinen Weg zum Wunschkind.</p>
+      <a href="#contact" class="price-btn">🤍 Erstgespräch anfragen</a>
+    </div>
+
+    <div class="price-card">
+      <h3>🤰 Schwangerschaftsbegleitung</h3>
+      <p class="price">ab 60€ pro Termin</p>
+      <p>Oder Pakete ab ca. 450€ für eine kontinuierliche Begleitung.</p>
+      <a href="#contact" class="price-btn">🤍 Erstgespräch anfragen</a>
+    </div>
+
+    <div class="price-card highlight">
+      <h3>🌸 Geburtsbegleitung</h3>
+      <p class="price">ab 850€</p>
+      <p>Individuelle 1:1 Begleitung inkl. Rufbereitschaft und Geburtspräsenz.</p>
+      <a href="#contact" class="price-btn">🤍 Erstgespräch anfragen</a>
+    </div>
+
+    <div class="price-card">
+      <h3>🕊 Wochenbett & Nachsorge</h3>
+      <p class="price">ab 50€ pro Besuch</p>
+      <p>Unterstützung im Alltag, emotionaler Halt und praktische Hilfe.</p>
+      <a href="#contact" class="price-btn">🤍 Erstgespräch anfragen</a>
+    </div>
+
+  </div>
+
+</section>
+<section class="pricing-trust">
+
+  <h2>Wie die Preise entstehen</h2>
+
+  <p>
+    Eine Doula-Begleitung ist keine standardisierte Dienstleistung. Jede Familie hat unterschiedliche Bedürfnisse, Intensität und Dauer der Begleitung.
+  </p>
+
+  <p>
+    Deshalb entstehen Preise bei mir individuell – abhängig davon, wie viel Begleitung du dir wünschst und in welcher Lebenssituation du dich befindest.
+  </p>
+
+  <p>
+    Im Erstgespräch schauen wir gemeinsam, was für dich wirklich sinnvoll ist – ohne Druck, ohne Verpflichtung.
+  </p>
+
+</section>
+<section class="decision">
+
+  <h2>Fühlst du dich angesprochen?</h2>
+
+  <p>
+    Dann musst du noch nichts entscheiden. Schreib mir einfach und wir schauen gemeinsam, ob und wie eine Begleitung für dich passt.
+  </p>
+
+  <a class="feedback-btn" href="https://wa.me/4915739643278?text=Hallo%20ich%20würde%20gern%20ein%20Erstgespräch%20mit%20dir%20vereinbaren">
+     🌹 Unverbindlich schreiben
+  </a>
+
+</section>
+<section id="erfahrungen" class="review-slider">
+
+  <h2>Erfahrungsberichte</h2>
+
+  <p class="slider-intro">
+    Echte Begleitungen – anonymisiert und aus Respekt vor der Privatsphäre.
+  </p>
+
+  <div class="slider-wrapper">
+
+    <button class="slider-btn left" onclick="moveSlide(-1)">‹</button>
+
+    <div class="slider-track" id="sliderTrack">
+
+      <div class="slide">
+        <div class="slide-content">
+          <h3>„Ich hatte große Angst vor der Geburt“</h3>
+          <p>
+            Nach einer schwierigen ersten Erfahrung war meine Schwangerschaft von Unsicherheit geprägt.
+            Durch die Begleitung habe ich gelernt, meinem Körper wieder zu vertrauen.
+            Während der Geburt war sie ruhig an meiner Seite – und ich konnte zum ersten Mal loslassen.
+          </p>
+          <span>– Mama nach 1. Geburt</span>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <h3>„Ich habe mich nicht allein gefühlt“</h3>
+          <p>
+            Besonders im Wochenbett war ihre Unterstützung unbezahlbar.
+            Sie war da, wenn ich geweint habe, wenn ich unsicher war und wenn ich einfach jemanden brauchte.
+          </p>
+          <span>– frisch gebackene Mama</span>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <h3>„Die Geburt war intensiv – aber nicht einsam“</h3>
+          <p>
+            Ich erinnere mich nicht an Schmerz, sondern an Sicherheit.
+            Ihre ruhige Präsenz hat mir geholfen, durch jede Welle zu gehen.
+          </p>
+          <span>– Geburt im Krankenhaus</span>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-content">
+          <h3>„Ich hätte das ohne sie nicht geschafft“</h3>
+          <p>
+            Es war mehr als Unterstützung – es war Halt.
+            Jemand, der mich wirklich gesehen hat, ohne zu urteilen.
+          </p>
+          <span>– Erstgebärende</span>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="slider-btn right" onclick="moveSlide(1)">›</button>
+
+  </div>
+<button class="feedback-btn" onclick="openFeedback()">
+  ⭐ Bewertung / Feedback hinterlassen
+</button>
+</section>
+<section class="trust">
+
+  <h2>Du bist hier sicher aufgehoben</h2>
+
+  <div class="trust-grid">
+
+    <div class="trust-item">
+      🌹
+      <h3>Einfühlsame 1:1 Begleitung</h3>
+      <p>Du wirst nicht „durchgeschleust“, sondern individuell begleitet – mit Zeit, Ruhe und echter Aufmerksamkeit für deine Situation.</p>
+    </div>
+
+    <div class="trust-item">
+      🕊
+      <h3>Erfahrung & ganzheitlicher Ansatz</h3>
+      <p>Ich verbinde emotionale Begleitung mit praktischem Wissen aus Kräuterkunde, Körperarbeit und Geburtsvorbereitung.</p>
+    </div>
+
+    <div class="trust-item">
+      🌿
+      <h3>Keine medizinische Hektik</h3>
+      <p>Bei mir gibt es keinen Zeitdruck und keine klinische Routine – nur Raum für dich, dein Tempo und deine Entscheidungen.</p>
+    </div>
+
+    <div class="trust-item">
+      🤱
+      <h3>Begleitung statt Bewertung</h3>
+      <p>Egal wo du gerade stehst – ich begleite dich ohne Urteil, ohne Druck und mit voller Wertschätzung.</p>
+    </div>
+
+  </div>
+
+  <div class="trust-note">
+    <p>✨ Mein Ziel ist nicht nur eine gute Geburt – sondern dass du dich sicher, gesehen und getragen fühlst.
+  </div>
+
+</section>
+
+<!-- CTA --><section class="cta">
+  <h2>Bereit für deine Reise?</h2>
+  <p>Ich bin an deiner Seite – ruhig, präsent und stärkend.</p>
+  <a class="btn" href="#contact">Kontakt aufnehmen</a>
+</section><!-- CONTACT --><section id="contact">
+  <h2>Kontakt</h2>
+<h2>
+  <a class="ff-btn primary"  href="https://wa.me/4915739643278?text=Hallo%20ich%20würde%20gern%20ein%20Erstgespräch%20mit%20dir%20vereinbaren"
+     target="_blank">
+    💬 Whatsapp
+  </a>
+
+  <a class="ff-btn secondary" 
+     href="https://chat.whatsapp.com/CHQKg6S6I8DKIA5dB7PADB" 
+     target="_blank">
+    🌿 Community
+  </a>
+
+  <a class="ff-btn tertiary" 
+     href="https://t.me/lichtwesendoula" 
+     target="_blank">
+    ✨ Telegram
+  </a>
+
+</h2>
+<form action="https://formspree.io/f/xyklyzwg" method="POST" class="contact-form">
+
+  <h3>Erzähl mir ein bisschen von dir</h3>
+  <p>Ganz unverbindlich – ich melde mich liebevoll bei dir zurück.</p>
+
+  <input type="text" name="name" placeholder="Dein Name" required />
+
+  <input type="email" name="email" placeholder="Deine E-Mail" required />
+
+  <input type="text" name="due_date" placeholder="Errechneter Geburtstermin (optional)" />
+
+  <select name="topic">
+    <option value="">Wobei wünschst du dir Begleitung?</option>
+    <option>Schwangerschaft</option>
+    <option>Geburtsbegleitung</option>
+    <option>Wochenbett</option>
+    <option>Kinderwunsch</option>
+    <option>Nur eine Frage</option>
+  </select>
+
+  <textarea name="message" rows="6"
+    placeholder="Erzähl mir ein bisschen über dich, deine Situation und was du dir wünschst..."></textarea>
+
+  <input type="text" name="_gotcha" style="display:none" />
+
+  <button type="submit">💌 Nachricht senden</button>
+
+  <p class="small-note">
+    Ich antworte dir so schnell wie möglich persönlich.
+  </p>
+
+</form>
+</section>
+<div id="feedbackModal" class="modal">
+
+  <div class="modal-content">
+
+    <span class="close" onclick="closeFeedback()">&times;</span>
+
+    <div id="feedbackForm">
+
+      <h2>Dein Feedback 🤍</h2>
+
+      <p>
+        Wenn du möchtest, kannst du hier deine Erfahrung teilen.
+        Dein Feedback hilft anderen Familien bei ihrer Entscheidung.
+      </p>
+
+      <input type="text" placeholder="Dein Name (oder anonym)" />
+      
+      <select>
+        <option>Wie war deine Erfahrung?</option>
+        <option>Sehr positiv</option>
+        <option>Positiv</option>
+        <option>Neutral</option>
+        <option>Herausfordernd, aber hilfreich</option>
+      </select>
+
+      <textarea rows="5" placeholder="Deine Bewertung / Erfahrung..."></textarea>
+
+      <button onclick="submitFeedback()">Absenden</button>
+
+    </div>
+
+    <div id="thankYou" style="display:none; text-align:center;">
+      <h2>Danke für dein Feedback 🤍</h2>
+      <p>
+        Deine Rückmeldung wird geprüft und kann – mit deinem Einverständnis –
+        auf der Website veröffentlicht werden.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+<script>
+function openFeedback() {
+  document.getElementById("feedbackModal").style.display = "flex";
+}
+
+function closeFeedback() {
+  document.getElementById("feedbackModal").style.display = "none";
+}
+
+function submitFeedback() {
+  document.getElementById("feedbackForm").style.display = "none";
+  document.getElementById("thankYou").style.display = "block";
+
+  // Dummy delay (fühlt sich realistischer an)
+  setTimeout(() => {
+    closeFeedback();
+    document.getElementById("feedbackForm").style.display = "block";
+    document.getElementById("thankYou").style.display = "none";
+  }, 3000);
+}
+
+// Close on outside click
+window.onclick = function(event) {
+  const modal = document.getElementById("feedbackModal");
+  if (event.target === modal) {
+    closeFeedback();
+  }
+}
+let currentSlide = 0;
+
+function moveSlide(direction) {
+  const track = document.getElementById("sliderTrack");
+  const slides = document.querySelectorAll(".slide");
+
+  currentSlide += direction;
+
+  if (currentSlide < 0) currentSlide = slides.length - 1;
+  if (currentSlide >= slides.length) currentSlide = 0;
+
+  track.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+  const track = document.getElementById("storyTrack");
+
+  function scrollStory(direction) {
+    const width = track.querySelector(".story-item").offsetWidth + 20;
+    track.scrollBy({
+      left: direction * width,
+      behavior: "smooth"
+    });
+  }
+</script>
+</body>
+</html>
