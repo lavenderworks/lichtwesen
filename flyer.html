@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <title>Lichtwesen Doula – Flyer Querformat</title>
 <style>
-/* Feste A4 Querformat-Größe */
+/* Feste A4 Querformat */
 body {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   width: 297mm;
-  height: 210mm;
+  height: 420mm;
   font-family: 'Inter', sans-serif;
   background: #f7f2ec;
   color: #4f4038;
@@ -17,34 +17,78 @@ body {
   overflow: hidden;
 }
 
-/* Panels: 6 Stück (zweifach gefaltet) */
+/* Container für 6 Panels */
 .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
   width: 297mm;
-  height: 210mm;
+  height: 420mm;
   gap: 0;
+  position: relative;
 }
 
+/* Panels */
 .panel {
   padding: 12mm;
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, #fff, #fef9f5);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  height: 100%; /* Höhe exakt A4 Panel */
   overflow: hidden;
+  position: relative;
 }
 
-h1 { font-family: 'Playfair Display', serif; font-size: 24pt; color:#c19a7b; margin-bottom:8pt;}
+/* Faltlinien für Druck */
+.container::before {
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:33.33%;
+  width:1px;
+  background: rgba(0,0,0,0.15);
+}
+.container::after {
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:66.66%;
+  width:1px;
+  background: rgba(0,0,0,0.15);
+}
+
+/* Texte */
+h1 { font-family: 'Playfair Display', serif; font-size: 24pt; color:#c19a7b; margin-bottom:6pt;}
 h2 { font-family: 'Playfair Display', serif; font-size: 18pt; margin-bottom:6pt;}
 h3 { font-family: 'Playfair Display', serif; font-size: 14pt; margin-bottom:4pt;}
 p { font-size: 10pt; line-height:1.5; margin-bottom:6pt; }
-img { width: 100%; border-radius:10px; margin-bottom:6pt; }
-.btn { display:inline-block; padding:8pt 14pt; background:#c19a7b; color:white; text-decoration:none; border-radius:30px; margin-top:6pt; font-size:10pt; }
-
 .note { font-size:8pt; color:#7a6a60; margin-top:4pt; }
 
+/* Bilder */
+img { width:100%; border-radius:10px; margin-bottom:6pt; }
+
+/* Buttons */
+.btn {
+  display:inline-block;
+  padding:8pt 14pt;
+  background:#c19a7b;
+  color:white;
+  text-decoration:none;
+  border-radius:30px;
+  margin-top:6pt;
+  font-size:10pt;
+}
+
+/* Icons (kleine Dekoration) */
+.icon {
+  width:24px;
+  height:24px;
+  vertical-align:middle;
+  margin-right:4px;
+}
 </style>
 </head>
 <body>
@@ -70,30 +114,30 @@ img { width: 100%; border-radius:10px; margin-bottom:6pt; }
 
 <!-- Panel 3 – Kinderwunsch & Planung -->
 <div class="panel">
-<h2>Kinderwunsch & Planung</h2>
+<h2><img src="assets/icon-seedling.png" class="icon" alt="Icon"> Kinderwunsch & Planung</h2>
 <p>Ein Kind beginnt oft als Gefühl. Ich unterstütze dich dabei, Vertrauen in deinen Körper zu entwickeln, Klarheit zu finden und dich innerlich vorzubereiten – in deinem Tempo und ohne Druck.</p>
 <img src="assets/doula1.png" alt="Kinderwunsch Begleitung">
 </div>
 
 <!-- Panel 4 – Schwangerschaftsbegleitung -->
 <div class="panel">
-<h2>Schwangerschaftsbegleitung</h2>
+<h2><img src="assets/icon-pregnant.png" class="icon" alt="Icon"> Schwangerschaftsbegleitung</h2>
 <p>Du musst diese Zeit nicht allein tragen. Mit Gesprächen, kleinen Ritualen und emotionaler Unterstützung fühlst du dich sicher, getragen und verbunden mit deinem Baby.</p>
 <img src="assets/pregnant1.jpg" alt="Schwangere Frau">
 </div>
 
 <!-- Panel 5 – Geburtsbegleitung -->
 <div class="panel">
-<h2>Geburtsbegleitung</h2>
+<h2><img src="assets/icon-birth.png" class="icon" alt="Icon"> Geburtsbegleitung</h2>
 <p>Während der Geburt bin ich konstant an deiner Seite. Ich halte den Raum, gebe Sicherheit und unterstütze dich, deinen eigenen Weg zu finden – ruhig, intuitiv und stärkend.</p>
 <img src="assets/calm1.jpg" alt="Geburtsbegleitung">
 </div>
 
 <!-- Panel 6 – Wochenbett & Kinderbetreuung -->
 <div class="panel">
-<h2>Wochenbett & Nachsorge</h2>
+<h2><img src="assets/icon-baby.png" class="icon" alt="Icon"> Wochenbett & Nachsorge</h2>
 <p>Nach der Geburt beginnt das echte Ankommen. Ich begleite dich emotional und praktisch, unterstütze beim Stillen, Alltag und Rückbildung, damit du in Ruhe in deiner neuen Rolle wachsen kannst.</p>
-<h3>Kinderbetreuung</h3>
+<h3><img src="assets/icon-hand.png" class="icon" alt="Icon"> Kinderbetreuung</h3>
 <p>Liebevolle Betreuung deines Babys oder deiner Kinder, damit du schlafen, durchatmen oder Termine wahrnehmen kannst – in Sicherheit und Vertrauen.</p>
 <img src="assets/baby2.jpg" alt="Wochenbett Betreuung">
 <a class="btn" href="https://lichtwesen.site">Mehr erfahren</a>
